@@ -25,7 +25,7 @@ public class Conta extends Pessoa{
         if (this.saldo != 0) {
             this.saldo -= saque;
         } else {
-            System.out.println("você não tem dinheiro para sacar");
+            System.out.println("Conta sem saldo");
         }
     }
 }

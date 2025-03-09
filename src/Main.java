@@ -43,8 +43,6 @@ public class Main {
                         System.out.println("Sua conta não existe");
                     }
                     break;
-
-
                 case 3:
                     System.out.println("Digite o numero da conta");
                     String contaSaque = sc.nextLine();
@@ -52,6 +50,8 @@ public class Main {
                     if (contaSaq != null){
                         System.out.println("Digite a quantia do saque");
                         contaSaq.sacarSaldo(sc.nextDouble());
+                    }else {
+                        System.out.println("Sua conta não existe");
                     }
                     break;
                 case 4:
