@@ -1,5 +1,7 @@
 import Entidades.Banco;
 import Entidades.Conta;
+import Entidades.Depositar;
+import Entidades.Sacar;
 
 import java.util.Scanner;
 
@@ -8,6 +10,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Banco banco = new Banco();
+        Sacar sacar = new Sacar();
+        Depositar depositar = new Depositar();
         int opcao;
 
         do {
@@ -38,7 +42,8 @@ public class Main {
                     Conta contaDeposito = banco.buscarConta(numerocontaDeposito);
                     if (contaDeposito != null){
                         System.out.println("Digite a quantia do deposito");
-                        contaDeposito.setSaldo(sc.nextDouble());
+                        depositar.executar(sc.nextDouble(), contaDeposito);
+                        System.out.printf("%nSaldo da conta %.2f", contaDeposito.getSaldo());
                     }else {
                         System.out.println("Sua conta não existe");
                     }
@@ -49,7 +54,8 @@ public class Main {
                     Conta contaSaq = banco.buscarConta(contaSaque);
                     if (contaSaq != null){
                         System.out.println("Digite a quantia do saque");
-                        contaSaq.sacarSaldo(sc.nextDouble());
+                        sacar.executar(sc.nextDouble(),contaSaq);
+                        System.out.printf("%nSaldo da conta %.2f", contaSaq.getSaldo());
                     }else {
                         System.out.println("Sua conta não existe");
                     }
@@ -60,6 +66,8 @@ public class Main {
                     Conta contaSald = banco.buscarConta(contaSaldo);
                     if (contaSald != null){
                         System.out.printf("%nSaldo da conta %.2f", contaSald.getSaldo());
+                    }else {
+                        System.out.println("Sua conta não existe");
                     }
                     break;
 

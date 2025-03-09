@@ -10,12 +10,13 @@ public class Conta extends Pessoa{
         this.numeroDaConta = numeroDaConta;
     }
 
+
     public String getNumeroDaConta() {
         return numeroDaConta;
     }
 
     public void setSaldo(double saldo) {
-        this.saldo += saldo;
+        this.saldo = saldo;
     }
 
     public double getSaldo() {
@@ -28,4 +29,5 @@ public class Conta extends Pessoa{
             System.out.println("Conta sem saldo");
         }
     }
+
 }
