@@ -31,8 +31,16 @@ public class Main {
                     String nome = sc.nextLine();
                     System.out.println("Digite o cpf da pessoa");
                     String cpf = sc.nextLine();
+                    if (banco.verificarCPF(cpf)){
+                        System.out.println("Conta com cpf ja existe");
+                        break;
+                    }
                     System.out.println("Digite o numero da conta");
                     String numeroDaConta = sc.nextLine();
+                    if (banco.buscarContaExistente(numeroDaConta)){
+                        System.out.println("Numero da conta ja existe");
+                        break;
+                    }
                     Conta contaNova = new Conta(nome, cpf, numeroDaConta);
                     banco.addConta(contaNova);
                     break;
