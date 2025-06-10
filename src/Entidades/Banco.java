@@ -20,4 +20,20 @@ public class Banco {
         }
         return null;
     }
+    public boolean buscarContaExistente(String conta){
+        for (Conta c : contas){
+            if(c.getNumeroDaConta().equals(conta)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean verificarCPF(String cpf){
+        for (Conta c : contas){
+            if(c.getCpf().equals(cpf)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

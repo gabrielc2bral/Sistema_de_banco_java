@@ -10,6 +10,10 @@ public class Conta extends Pessoa{
         this.numeroDaConta = numeroDaConta;
     }
 
+    @Override
+    public String getCpf() {
+        return super.getCpf();
+    }
 
     public String getNumeroDaConta() {
         return numeroDaConta;
