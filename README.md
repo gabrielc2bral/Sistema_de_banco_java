@@ -9,10 +9,17 @@
 
 ✅ Criar uma conta para uma pessoa\
 ✅ Buscar uma conta\
-✅ Exibir saldo da conta, sacar, depositar e mostrar as informações da conta\
+✅ Exibir saldo da conta, sacar, depositar, tranferir e mostrar as informações da conta\
 ✅ Impedir que o usuário crie uma conta com CPF ou número de conta já existentes no banco\
 ✅ Validar as entradas para evitar erros\
 ✅ Opção para sair do sistema
+
+## 💡 Melhorias Futuras
+
+- 🔍 **Validação de CPF** (ex: verificar se tem 11 dígitos e se é válido)
+- 🧪 **Testes automatizados** para garantir que funcionalidades não quebrem com alterações futuras
+- 💾 **Persistência de dados** (salvar contas em arquivo ou banco de dados)
+- 🔐 **Autenticação com senha** por conta
 
 ## 🖥️ Exemplo de Saída
 
@@ -22,7 +29,8 @@
 2 - Depositar
 3 - Sacar
 4 - Exibir Saldo
-5 - Sair
+5 - Transferência
+6 - Sair
 Escolha uma opção: 1
 Digite o nome da pessoa
 gabriel
