@@ -1,23 +1,26 @@
 package Entidades;
 
-public class Conta extends Pessoa{
-    private String numeroDaConta;
+public class Conta{
+    private int id;
     private double saldo;
+    private Pessoa pessoa;
 
-
-    public Conta(String nome, String cpf, String numeroDaConta) {
-        super(nome, cpf);
-        this.numeroDaConta = numeroDaConta;
+    public Conta(Pessoa pessoa, int id) {
+    	this.pessoa = pessoa;
+        this.id = id;
     }
+    
+    public Pessoa getPessoa() {
+		return pessoa;
+	}
 
-    @Override
-    public String getCpf() {
-        return super.getCpf();
-    }
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
 
-    public String getNumeroDaConta() {
-        return numeroDaConta;
-    }
+	public int getId() {
+		return id;
+	}
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;

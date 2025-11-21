@@ -7,6 +7,17 @@ import Entidades.Sacar;
 import java.util.Scanner;
 
 public class Main {
+	
+	public static void imprimirMenu() {
+		System.out.println("\n==== MENU BANCO ====");
+		System.out.println("1 - Criar Conta");
+		System.out.println("2 - Depositar");
+		System.out.println("3 - Sacar");
+		System.out.println("4 - Exibir Saldo");
+		System.out.println("5 - Transferencia");
+		System.out.println("6 - Sair");
+		System.out.print("Escolha uma opção: ");
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -18,59 +29,19 @@ public class Main {
 		String numeroContaOrigem, numeroContaDestino, nome, cpf, numeroConta;
 
 		do {
-			System.out.println("\n==== MENU BANCO ====");
-			System.out.println("1 - Criar Conta");
-			System.out.println("2 - Depositar");
-			System.out.println("3 - Sacar");
-			System.out.println("4 - Exibir Saldo");
-			System.out.println("5 - Transferencia");
-			System.out.println("6 - Sair");
-			System.out.print("Escolha uma opção: ");
-
+			imprimirMenu();
 			opcao = sc.nextInt();
 			sc.nextLine();
+			
 			switch (opcao) {
 			case 1:
-				System.out.println("Digite o nome da pessoa");
-				nome = sc.nextLine();
-				System.out.println("Digite o cpf da pessoa");
-				cpf = sc.nextLine();
-				if(banco.verificarCPF(cpf)) {
-					System.out.println("Uma conta com este numero de cpf ja existe!");
-					break;
-				}
-				System.out.println("Digite o numero da conta");
-				numeroConta = sc.nextLine();
-				if(banco.buscarContaExistente(numeroConta)) {
-					System.out.println("Uma conta com este numero ja existe!");
-					break;
-				}
-				Conta contaNova = new Conta(nome, cpf, numeroConta);
-				banco.addConta(contaNova);
+				banco.criarConta(sc);
 				break;
 			case 2:
-				System.out.println("Digite o numero da conta");
-				numeroConta = sc.nextLine();
-				Conta contaDeposito = banco.buscarConta(numeroConta);
-				if (contaDeposito != null) {
-					System.out.println("Digite a quantia do deposito");
-					depositar.executar(sc.nextDouble(), contaDeposito);
-					System.out.printf("%nSaldo da conta %.2f", contaDeposito.getSaldo());
-				} else {
-					System.out.println("Sua conta não existe");
-				}
+				banco.depositar(sc);
 				break;
 			case 3:
-				System.out.println("Digite o numero da conta");
-				numeroConta = sc.nextLine();
-				Conta contaSaque = banco.buscarConta(numeroConta);
-				if (contaSaque != null) {
-					System.out.println("Digite a quantia do saque");
-					sacar.executar(sc.nextDouble(), contaSaque);
-					System.out.printf("%nSaldo da conta %.2f", contaSaque.getSaldo());
-				} else {
-					System.out.println("Sua conta não existe");
-				}
+				banco.sacar(sc);
 				break;
 			case 4:
 				System.out.println("Digite o numero da conta");
