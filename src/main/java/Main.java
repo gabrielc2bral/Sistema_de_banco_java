@@ -1,4 +1,3 @@
-package app;
 import Entidades.Banco;
 import Entidades.Conta;
 import Entidades.Depositar;
