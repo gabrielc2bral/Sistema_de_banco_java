@@ -10,14 +10,27 @@ import java.sql.SQLException;
 
 public class TitularDao {
 
+    private final JDBCUtil JDBC = JDBCUtil.getJdbc();
+    private static TitularDao titularDao;
+
+    private TitularDao() {
+    }
+
+    public static TitularDao getInstance() {
+        if(titularDao == null){
+            titularDao = new TitularDao();
+        }
+        return titularDao;
+    }
+
     public Titular salvar(Titular titular) {
         String sql = """
-            INSERT INTO titular (nome, cpf)
+            INSERT INTO titulares (nome, cpf)
             VALUES (?, ?)
             RETURNING id
         """;
 
-        try (Connection conn = JDBCUtil.getConnection();
+        try (Connection conn = JDBC.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, titular.getNome());
@@ -37,11 +50,11 @@ public class TitularDao {
 
         String sql = """
         SELECT id, nome, cpf
-        FROM titular
+        FROM titulares
         WHERE cpf = ?
     """;
 
-        try (Connection conn = JDBCUtil.getConnection();
+        try (Connection conn = JDBC.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, cpf);

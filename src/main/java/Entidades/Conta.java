@@ -11,7 +11,26 @@ public class Conta{
     	this.titular = titular;
         this.saldo = saldo;
     }
-    
+
+    public void saque(BigDecimal valor){
+        validarValor(valor);
+        if (saldo.compareTo(valor) < 0){
+            throw new IllegalStateException("Saldo insuficiente ");
+        }
+        saldo = saldo.subtract(valor);
+    }
+
+    public void depositar(BigDecimal valor){
+        validarValor(valor);
+        saldo = saldo.add(valor);
+    }
+
+    public void validarValor(BigDecimal valor){
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0){
+            throw new IllegalArgumentException("Valor inválido");
+        }
+    }
+
     public Titular getTitular() {
 		return titular;
 	}
@@ -27,6 +46,14 @@ public class Conta{
 
     public BigDecimal getSaldo() {
         return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setTitular(Titular titular) {
+        this.titular = titular;
     }
 
     @Override

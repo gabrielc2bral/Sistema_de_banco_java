@@ -5,7 +5,9 @@
 - **ArrayList** (Armazenar Objetos)
 - **JDBC** - Ainda em implementação na Branch [refatoracao-geral](https://github.com/gabrielc2bral/Sistema_de_banco_java/tree/refatoracao-geral)
 - **DAO** - Camada de acesso ao Banco de dados
+- **Singleton** Para criar uma instância para cada objeto 
 - **PostgreSQL** Persistência em Banco relacional
+- **FLYWAY** Para versionamento da tabela do banco
 ## 📋 Funcionalidades
 
 ✅ Criar uma conta para uma pessoa\
