@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class TitularDao {
 
-    private final JDBCUtil JDBC = JDBCUtil.getJdbc();
+    private final JDBCUtil JDBC = JDBCUtil.getInstance();
     private static TitularDao titularDao;
 
     private TitularDao() {

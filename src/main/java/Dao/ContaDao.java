@@ -4,7 +4,6 @@ import Entidades.Conta;
 import Entidades.Titular;
 import util.JDBCUtil;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 
 public class ContaDao {
 
-    private final JDBCUtil JDBC = JDBCUtil.getJdbc();
+    private final JDBCUtil JDBC = JDBCUtil.getInstance();
     private static ContaDao contaDao;
 
     private ContaDao() {

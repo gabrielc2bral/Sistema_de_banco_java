@@ -13,8 +13,8 @@ public class JDBCUtil {
     private JDBCUtil() {
     }
 
-    public static JDBCUtil getJdbc() {
-        if (jdbc == null){
+    public static JDBCUtil getInstance() {
+        if (jdbc == null) {
             jdbc = new JDBCUtil();
         }
         return jdbc;
@@ -23,7 +23,7 @@ public class JDBCUtil {
     public Connection getConnection() {
         Connection conn = null;
         try {
-            if(conn != null) return conn;
+            if (conn != null) return conn;
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conectar ao PostgreSQL", e);

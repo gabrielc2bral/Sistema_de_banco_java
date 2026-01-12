@@ -2,43 +2,43 @@ package Entidades;
 
 import java.math.BigDecimal;
 
-public class Conta{
+public class Conta {
     private long id;
     private BigDecimal saldo;
     private Titular titular;
 
     public Conta(Titular titular, BigDecimal saldo) {
-    	this.titular = titular;
+        this.titular = titular;
         this.saldo = saldo;
     }
 
-    public void saque(BigDecimal valor){
+    public void saque(BigDecimal valor) {
         validarValor(valor);
-        if (saldo.compareTo(valor) < 0){
+        if (saldo.compareTo(valor) < 0) {
             throw new IllegalStateException("Saldo insuficiente ");
         }
         saldo = saldo.subtract(valor);
     }
 
-    public void depositar(BigDecimal valor){
+    public void depositar(BigDecimal valor) {
         validarValor(valor);
         saldo = saldo.add(valor);
     }
 
-    public void validarValor(BigDecimal valor){
-        if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0){
+    public void validarValor(BigDecimal valor) {
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Valor inválido");
         }
     }
 
     public Titular getTitular() {
-		return titular;
-	}
+        return titular;
+    }
 
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
     public void setId(long id) {
         this.id = id;

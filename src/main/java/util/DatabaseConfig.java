@@ -4,16 +4,16 @@ import org.flywaydb.core.Flyway;
 
 public class DatabaseConfig {
 
-    private final String URL = JDBCUtil.getJdbc().getURL();
-    private final String  USER = JDBCUtil.getJdbc().getUSER();
-    private final String PASSWORD = JDBCUtil.getJdbc().getPASSWORD();
+    private final String URL = JDBCUtil.getInstance().getURL();
+    private final String USER = JDBCUtil.getInstance().getUSER();
+    private final String PASSWORD = JDBCUtil.getInstance().getPASSWORD();
     private static DatabaseConfig databaseConfig;
 
     private DatabaseConfig() {
     }
 
-    public static DatabaseConfig getDatabaseConfig() {
-        if (databaseConfig == null){
+    public static DatabaseConfig getInstance() {
+        if (databaseConfig == null) {
             databaseConfig = new DatabaseConfig();
         }
         return databaseConfig;

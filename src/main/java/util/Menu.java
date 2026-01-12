@@ -1,7 +1,7 @@
 package util;
 
 import Entidades.Conta;
-import Entidades.TipoOperacao;
+import Entidades.Operacao;
 import Service.ContaService;
 import Service.CriarContaService;
 
@@ -13,6 +13,7 @@ public class Menu {
         System.out.println("\n==== MENU BANCO ====");
         System.out.println("1 - Criar Conta");
         System.out.println("2 - Depositar / Sacar");
+        System.out.println("2 - Sacar");
         System.out.println("4 - Exibir Saldo");
         System.out.println("5 - Transferencia");
         System.out.println("6 - Sair");
@@ -22,7 +23,6 @@ public class Menu {
     public static void iniciarMenu() {
         int opcao;
         Long id;
-        Conta conta;
         Scanner sc = new Scanner(System.in);
         do {
             Menu.imprimirMenu();
@@ -38,24 +38,19 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("Digite 1 para depositar ou 2 para sacar");
-                    int i = sc.nextInt();
-                    switch (i) {
-                        case 1:
-                            System.out.println("Digite o ID da conta: ");
-                            id = sc.nextLong();
-                            conta = ContaService.getInstance().buscaContaPorID(id);
-                            sc.nextLine();
-                            System.out.println(conta.getId());
-                            ContaService.getInstance().operacao(TipoOperacao.DEPOSITO, conta, sc);
-                            break;
-                        case 2:
-                            System.out.println("Digite o ID da conta: ");
-                            id = sc.nextLong();
-                            sc.nextLine();
-                            conta = ContaService.getInstance().buscaContaPorID(id);
-                            ContaService.getInstance().operacao(TipoOperacao.SAQUE, conta, sc);
-                            break;
-                    }
+                    opcao = sc.nextInt();
+                    Operacao operacao = switch (opcao) {
+                        case 1 -> Operacao.DEPOSITO;
+                        case 2 -> Operacao.SAQUE;
+                        default -> throw new IllegalArgumentException("Opção inválida");
+                    };
+                    System.out.println("Digite o ID da conta: ");
+                    id = sc.nextLong();
+                    Conta conta = ContaService.getInstance().buscaContaPorID(id);
+                    System.out.print("Digite o valor: ");
+                    BigDecimal valor = sc.nextBigDecimal();
+
+                    operacao.executarOperacao(conta, valor);
 
             }
         } while (opcao != 6);
