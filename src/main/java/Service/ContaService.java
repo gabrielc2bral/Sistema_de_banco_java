@@ -3,10 +3,7 @@ package Service;
 import Dao.ContaDao;
 import Dao.TitularDao;
 import Entidades.Conta;
-import Entidades.Operacao;
-
-import java.math.BigDecimal;
-import java.util.Scanner;
+import util.CpfUtil;
 
 public class ContaService {
 
@@ -26,16 +23,14 @@ public class ContaService {
         return contaService;
     }
 
-    public void mostarContaPorID(long id) {
-        Conta conta = contaDao.buscarContaPorId(id);
-        if (conta != null) {
-            System.out.println(conta.getTitular().toString());
-            System.out.println("");
-            System.out.println(conta);
-
-        } else {
-            System.out.println("Conta não existe");
+    public Conta buscaContaPorCPF(String cpf){
+        String cpfLimpo = CpfUtil.limparCpf(cpf);
+        if (!CpfUtil.verificarCpfValido(cpfLimpo)) throw new IllegalArgumentException("Cpf Invalido, cancelando operação!");
+        Conta conta = contaDao.getInstance().buscarContaPorCPF(cpfLimpo);
+        if (conta == null){
+            throw new IllegalStateException("Conta não existe");
         }
+        return conta;
     }
 
     public Conta buscaContaPorID(long id) {

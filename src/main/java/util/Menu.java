@@ -6,6 +6,7 @@ import Service.ContaService;
 import Service.CriarContaService;
 
 import java.math.BigDecimal;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -23,6 +24,7 @@ public class Menu {
     public static void iniciarMenu() {
         int opcao;
         Long id;
+        String cpf;
         Scanner sc = new Scanner(System.in);
         do {
             Menu.imprimirMenu();
@@ -34,23 +36,37 @@ public class Menu {
                     String nomeDoTitular = sc.nextLine();
                     System.out.println("Digite o cpf do titular");
                     String cpfDoTitular = sc.nextLine();
-                    CriarContaService.getInstance().criarConta(nomeDoTitular, cpfDoTitular, new BigDecimal("0"));
+                    try {
+                        CriarContaService.getInstance().criarConta(nomeDoTitular, cpfDoTitular, new BigDecimal("0"));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
-                    System.out.println("Digite 1 para depositar ou 2 para sacar");
-                    opcao = sc.nextInt();
-                    Operacao operacao = switch (opcao) {
-                        case 1 -> Operacao.DEPOSITO;
-                        case 2 -> Operacao.SAQUE;
-                        default -> throw new IllegalArgumentException("Opção inválida");
-                    };
-                    System.out.println("Digite o ID da conta: ");
-                    id = sc.nextLong();
-                    Conta conta = ContaService.getInstance().buscaContaPorID(id);
-                    System.out.print("Digite o valor: ");
-                    BigDecimal valor = sc.nextBigDecimal();
 
-                    operacao.executarOperacao(conta, valor);
+                    try {
+                        System.out.println("Digite 1 para depositar ou 2 para sacar");
+                        opcao = sc.nextInt();
+                        sc.nextLine();
+                        Operacao operacao = switch (opcao) {
+                            case 1 -> Operacao.DEPOSITO;
+                            case 2 -> Operacao.SAQUE;
+                            default -> throw new IllegalArgumentException("Opção inválida");
+                        };
+                        System.out.println("Digite o CPF da conta: ");
+                        cpf = sc.nextLine();
+                        Conta conta = ContaService.getInstance().buscaContaPorCPF(cpf);
+                        System.out.print("Digite o valor: ");
+                        BigDecimal valor = sc.nextBigDecimal();
+                        operacao.executarOperacao(conta, valor);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    } catch (InputMismatchException e) {
+                        System.out.println("Operação cancelada"); // melhorar essa mensagem depois :>
+                    } catch (IllegalStateException e) {
+                        System.out.println(e.getMessage());
+                    }
+
 
             }
         } while (opcao != 6);

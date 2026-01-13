@@ -40,7 +40,6 @@ public class ContaDao {
 
             if (rs.next()) {
                 conta.setId(rs.getLong("id"));
-                System.out.println("Conta criada com sucesso");
             }
             return conta;
         } catch (SQLException e) {
@@ -61,6 +60,33 @@ public class ContaDao {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Titular titular = new Titular(rs.getString("titular"), rs.getString("cpf"));
+                Conta conta = new Conta(titular, rs.getBigDecimal("saldo"));
+                conta.setId(rs.getInt("conta_id"));
+                return conta;
+            } else return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public Conta buscarContaPorCPF(String cpf) {
+        String sql = """
+                    SELECT c.id AS conta_id, c.saldo, t.nome AS titular, t.cpf
+                    FROM titulares t
+                    INNER JOIN contas c on t.id = c.titular_id
+                    WHERE t.cpf = ?
+                """;
+
+        try (Connection conn = JDBC.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, cpf);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
