@@ -1,0 +1,6 @@
+CREATE TABLE titulares(
+
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) NOT NULL
+);
