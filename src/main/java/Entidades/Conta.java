@@ -25,6 +25,19 @@ public class Conta {
         saldo = saldo.add(valor);
     }
 
+    public void debitar(BigDecimal valor) {
+        validarValor(valor);
+        if (saldo.compareTo(valor) < 0) {
+            throw new IllegalStateException("Saldo insuficiente ");
+        }
+        saldo = saldo.subtract(valor);
+    }
+
+    public void creditar(BigDecimal valor) {
+        validarValor(valor);
+        saldo = saldo.add(valor);
+    }
+
     public void validarValor(BigDecimal valor) {
         if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Valor inválido");

@@ -4,6 +4,7 @@ import Entidades.Conta;
 import Entidades.Titular;
 import util.JDBCUtil;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -115,6 +116,30 @@ public class ContaDao {
             } else System.out.println("Conta não existe");
         } catch (SQLException e) {
             throw new RuntimeException();
+        }
+    }
+
+    public void debitar(Conta conta, Connection conn) {
+        String sql = "UPDATE contas SET saldo = ? WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setBigDecimal(1, conta.getSaldo());
+            ps.setLong(2, conta.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void creditar(Conta conta, Connection conn) {
+        String sql = "UPDATE contas SET saldo = ? WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setBigDecimal(1, conta.getSaldo());
+            ps.setLong(2, conta.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
