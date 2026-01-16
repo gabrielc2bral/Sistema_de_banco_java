@@ -72,11 +72,15 @@ public class Menu {
                     break;
 
                 case 3:
-                    System.out.println("Verificando saldo ");
-                    System.out.println("Digite o CPF da conta: ");
-                    cpf = sc.nextLine();
-                    Conta conta = contaService.buscaContaPorCPF(cpf);
-                    System.out.println("Saldo da conta: R$" + conta.getSaldo());
+                    try {
+                        System.out.println("Verificando saldo ");
+                        System.out.println("Digite o CPF da conta: ");
+                        cpf = sc.nextLine();
+                        Conta conta = contaService.buscaContaPorCPF(cpf);
+                        System.out.println("Saldo da conta: R$" + conta.getSaldo());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 4:
@@ -99,7 +103,7 @@ public class Menu {
                         System.out.println("Operação cancelada"); // melhorar essa mensagem depois :>
                     } catch (IllegalStateException e) {
                         System.out.println(e.getMessage());
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -107,6 +111,7 @@ public class Menu {
                     System.out.println("Opção invalida!");
             }
         } while (opcao != 5);
+        System.out.println("Saindo do sistema...");
     }
 
 }
