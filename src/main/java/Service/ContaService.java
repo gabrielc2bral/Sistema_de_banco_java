@@ -70,7 +70,7 @@ public class ContaService {
         String cpfLimpo = CpfUtil.limparCpf(cpf);
         if (!CpfUtil.verificarCpfValido(cpfLimpo))
             throw new IllegalArgumentException("Cpf Invalido, cancelando operação!");
-        Conta conta = contaDao.getInstance().buscarContaPorCPF(cpfLimpo);
+        Conta conta = contaDao.buscarContaPorCPF(cpfLimpo);
         if (conta == null) {
             throw new IllegalStateException("Conta não existe");
         }

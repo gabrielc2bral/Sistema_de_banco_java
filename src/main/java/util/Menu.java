@@ -80,6 +80,8 @@ public class Menu {
                         System.out.println("Saldo da conta: R$" + conta.getSaldo());
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
+                    }catch (IllegalStateException e){
+                        System.out.println(e.getMessage());
                     }
                     break;
 
